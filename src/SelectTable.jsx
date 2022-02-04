@@ -1,5 +1,8 @@
 import React from "react";
 import './table.css';
+import HeaderComponent from "./HeaderComponent";
+import TableHeader from "./TableHeader";
+import TableBodyComponent from "./TableBodyComponent";
 
 
 const Users = [
@@ -98,52 +101,15 @@ class SelectTableComponent extends React.Component {
         });
     }
 
-    renderHeader() {
-        return (
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            checked={this.state.MasterChecked}
-                            id="mastercheck"
-                            onChange={(e) => this.onMasterCheck(e)}
-                        />
-                    </th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Website</th>
-                </tr>
-            </thead>
-        );
-    }
-
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <table className="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">
-                                        <input
-                                            type="checkbox"
-                                            className="form-check-input"
-                                            checked={this.state.MasterChecked}
-                                            id="mastercheck"
-                                            onChange={(e) => this.onMasterCheck(e)}
-                                        />
-                                    </th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Website</th>
-                                </tr>
-                            </thead>
-                            {/* renderHeader(); */}
+
+                            <HeaderComponent checked={this.state.MasterChecked} onChange={(e) => this.onMasterCheck(e)} />
+                            {/* <TableBody checked={user.selected} onChange={(e) => this.onItemCheck(e, user)} user={user}/> */}
                             <tbody>
                                 {this.state.List.map((user) => (
                                     <tr key={user.id} className={user.selected ? "selected" : ""}>
@@ -156,10 +122,11 @@ class SelectTableComponent extends React.Component {
                                                 onChange={(e) => this.onItemCheck(e, user)}
                                             />
                                         </th>
-                                        <td>{user.name}</td>
+                                        {/* <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>{user.phone}</td>
-                                        <td>{user.website}</td>
+                                        <td>{user.website}</td> */}
+                                        <TableBodyComponent user={user} />
                                     </tr>
                                 ))}
                             </tbody>
